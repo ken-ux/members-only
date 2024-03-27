@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { DateTime } = require("luxon");
 
 const Schema = mongoose.Schema;
 
@@ -9,10 +10,8 @@ const MessageSchema = new Schema({
   author: { type: Schema.Types.ObjectId, ref: "User", required: true },
 });
 
-// TO DO
-
 MessageSchema.virtual("timestamp_formatted").get(function () {
-  return `formatted date goes here`;
+  return DateTime.fromJSDate(this.timestamp).toLocaleString();
 });
 
 module.exports = mongoose.model("Message", MessageSchema);
