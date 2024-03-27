@@ -3,3 +3,7 @@ extends layout
 block content
   h1= title
   p Welcome to #{ title }
+  each message in messages
+    li #{ message }
+  else
+    p There are no messages for you to read.
