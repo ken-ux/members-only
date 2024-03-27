@@ -3,8 +3,6 @@ extends layout
 block content
   h1= title
   p Welcome to #{ title }
-  a(href="/sign-up") Sign-Up 
-  a(href="/login") Login
   each message in messages
     li #{ message }
   else
