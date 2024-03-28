@@ -21,4 +21,7 @@ router.post("/login", index_controller.login_post);
 // GET profile page
 router.get("/profile", index_controller.profile_get);
 
+// GET logout
+router.get("/logout", index_controller.logout);
+
 module.exports = router;

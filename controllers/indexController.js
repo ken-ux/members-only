@@ -154,3 +154,12 @@ exports.login_post = [
 exports.profile_get = (req, res, next) => {
   res.send("NOT IMPLEMENTED: Profile GET");
 };
+
+exports.logout = (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+};
