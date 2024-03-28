@@ -3,6 +3,7 @@ const User = require("../models/user");
 const Message = require("../models/message");
 const { check, body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
 exports.index = asyncHandler(async (req, res, next) => {
   const messages = await Message.find({});
@@ -93,12 +94,59 @@ exports.sign_up_post = [
 ];
 
 exports.login_get = (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Login page GET");
+  res.render("login", { title: "Login" });
 };
 
-exports.login_post = (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Login page POST");
-};
+exports.login_post = [
+  // Validate and sanitize fields.
+  body("username").trim().escape(),
+  check("username").custom(async (value) => {
+    const usernameExists = await User.findOne({ username: value }).exec();
+    if (usernameExists === null) {
+      throw new Error(
+        "User does not exist. Please check username and try again."
+      );
+    }
+  }),
+  body("password").trim().escape(),
+
+  // Process request after validation and sanitization.
+  (req, res, next) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // There are errors. Render the form again with sanitized values/error messages.
+      res.render("login", {
+        title: "Login",
+        username: req.body.username,
+        errors: errors.array(),
+      });
+      return;
+    }
+    // Validation is successful, call next() to go on with passport authentication.
+    next();
+  },
+
+  // Authenticate user
+  (req, res, next) => {
+    passport.authenticate("local", (err, user, info) => {
+      // If user isn't authenticated, rerender page with error message.
+      if (!user) {
+        const errors = [{ msg: info.message }];
+        return res.render("login", { title: "Login", errors: errors });
+      }
+      // User is authenticated, log them into the session.
+      req.login(user, function (err) {
+        if (err) {
+          return next(err);
+        }
+        // Redirect to home page if there are no login issues
+        return res.redirect("/");
+      });
+    })(req, res, next);
+  },
+];
 
 exports.profile_get = (req, res, next) => {
   res.send("NOT IMPLEMENTED: Profile GET");
