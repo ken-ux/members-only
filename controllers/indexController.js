@@ -131,6 +131,9 @@ exports.login_post = [
   // Authenticate user
   (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
+      if (err) {
+        return next(err);
+      }
       // If user isn't authenticated, rerender page with error message.
       if (!user) {
         const errors = [{ msg: info.message }];
