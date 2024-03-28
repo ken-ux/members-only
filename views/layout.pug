@@ -8,10 +8,12 @@ html
       ul
         li
           a(href="/") Home
-        li
-          a(href="/login") Login
-        li
-          a(href="/sign-up") Sign-Up
-        li
-          a(href="/logout") Logout
+        if currentUser
+          li
+            a(href="/logout") Logout
+        else
+          li
+            a(href="/login") Login
+          li
+            a(href="/sign-up") Sign-Up
     block content
