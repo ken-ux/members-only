@@ -18,10 +18,16 @@ router.get("/login", index_controller.login_get);
 // POST login page
 router.post("/login", index_controller.login_post);
 
+// GET logout
+router.get("/logout", index_controller.logout);
+
 // GET profile page
 router.get("/profile", index_controller.profile_get);
 
-// GET logout
-router.get("/logout", index_controller.logout);
+// GET message page
+router.get("/send-message", index_controller.send_message_get);
+
+// POST message page
+router.post("/send-message", index_controller.send_message_post);
 
 module.exports = router;

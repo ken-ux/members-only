@@ -151,10 +151,6 @@ exports.login_post = [
   },
 ];
 
-exports.profile_get = (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Profile GET");
-};
-
 exports.logout = (req, res, next) => {
   req.logout((err) => {
     if (err) {
@@ -163,3 +159,63 @@ exports.logout = (req, res, next) => {
     res.redirect("/");
   });
 };
+
+exports.profile_get = (req, res, next) => {
+  res.send("NOT IMPLEMENTED: Profile GET");
+};
+
+exports.send_message_get = (req, res, next) => {
+  // Redirect user to home page if they're not signed in
+  if (!req.user) {
+    return res.redirect("/");
+  }
+  res.render("send_message", { title: "Send Message" });
+};
+
+exports.send_message_post = [
+  // Validate and sanitize fields.
+  body("title")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Title cannot be empty.")
+    .isLength({ max: 30 })
+    .withMessage("Title cannot be longer than 30 characters.")
+    .escape(),
+  body("text")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Message cannot be empty.")
+    .isLength({ max: 300 })
+    .withMessage("Message cannot be longer than 300 characters.")
+    .escape(),
+
+  // Process request after validation and sanitization.
+  asyncHandler(async (req, res, next) => {
+    // Extract the validation errors from a request.
+    const errors = validationResult(req);
+
+    const user = await User.findById(req.user.id);
+
+    // Create a User object with escaped and trimmed data.
+    const message = new Message({
+      title: req.body.title,
+      text: req.body.text,
+      timestamp: Date.now(),
+      author: user,
+    });
+
+    if (!errors.isEmpty()) {
+      // There are errors. Render the form again with sanitized values/error messages.
+      res.render("send_message", {
+        title: "Send Message",
+        message: message,
+        errors: errors.array(),
+      });
+      return;
+    }
+    // Validation is successful, update the timestamp before saving message and redirecting to index.
+    message.timestamp = Date.now();
+    await message.save();
+    res.redirect("/");
+  }),
+];

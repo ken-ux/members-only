@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+  form(method="POST")
+    .form-group
+      label(for="title") Title:
+      input#title(
+        type="text",
+        name="title",
+        required,
+        value=message === undefined ? "" : message.title
+      )
+    .form-group
+      label(for="text") Message:
+      textarea#text(name="text", required)= message === undefined ? "" : message.text
+    button(type="submit") Submit
+
+  if errors
+    ul
+      each error in errors
+        li!= error.msg
