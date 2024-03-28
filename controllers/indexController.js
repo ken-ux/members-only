@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 exports.index = asyncHandler(async (req, res, next) => {
-  const messages = await Message.find({});
+  const messages = await Message.find({}).populate("author").exec();
   res.render("index", { title: "Members Only", messages: messages });
 });
 

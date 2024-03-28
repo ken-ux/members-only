@@ -3,7 +3,17 @@ extends layout
 block content
   h1= title
   p Welcome to #{ title }
-  each message in messages
-    li #{ message }
-  else
-    p There are no messages for you to read.
+  if currentUser
+    a(href="/send-message") Send a Message
+  ul 
+    each message in messages
+      li
+        p Title: #{message.title}
+        p Message: #{message.text}
+        if currentUser
+          p Author: #{message.author.full_name}
+        else
+          p Hidden Author
+        p Date: #{message.timestamp_formatted}
+    else
+      p There are no messages for you to read.
