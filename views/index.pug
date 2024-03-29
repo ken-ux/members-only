@@ -5,15 +5,15 @@ block content
   p Welcome to #{ title }
   if currentUser
     a(href="/send-message") Send a Message
-  ul 
+  ul
     each message in messages
       li
-        p Title: #{message.title}
-        p Message: #{message.text}
+        p Title: #{ message.title }
+        p Message: #{ message.text }
         if currentUser
-          p Author: #{message.author.full_name}
+          p Author: #{ message.author.full_name }
         else
           p Hidden Author
-        p Date: #{message.timestamp_formatted}
+        p Date: #{ message.timestamp_formatted }
     else
       p There are no messages for you to read.
