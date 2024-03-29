@@ -144,7 +144,7 @@ exports.login_post = [
         if (err) {
           return next(err);
         }
-        // Redirect to home page if there are no login issues
+        // Redirect to home page if there are no login issues.
         return res.redirect("/");
       });
     })(req, res, next);
@@ -161,8 +161,40 @@ exports.logout = (req, res, next) => {
 };
 
 exports.profile_get = (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Profile GET");
+  // Redirect user to home page if they're not signed in.
+  if (!req.user) {
+    return res.redirect("/");
+  }
+  res.render("profile", { title: "Profile" });
 };
+
+exports.profile_post = [
+  // Sanitize fields.
+  body("membershipPassword").trim().escape(),
+  body("adminPassword").trim().escape(),
+
+  asyncHandler(async (req, res, next) => {
+    let admin_status = req.user.admin;
+    let membership_status = req.user.membership;
+
+    // Check if correct admin or membership passwords have been input.
+    if (req.body.adminPassword === process.env.ADMIN_PW) {
+      admin_status = true;
+    }
+    if (req.body.membershipPassword === process.env.MEMBERSHIP_PW) {
+      membership_status = true;
+    }
+
+    // Update user admin and membership statuses.
+    await User.findByIdAndUpdate(req.user.id, {
+      admin: admin_status,
+      membership: membership_status,
+    });
+
+    // Refresh page after updating user in database.
+    res.redirect("/profile");
+  }),
+];
 
 exports.send_message_get = (req, res, next) => {
   // Redirect user to home page if they're not signed in

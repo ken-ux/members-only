@@ -24,6 +24,9 @@ router.get("/logout", index_controller.logout);
 // GET profile page
 router.get("/profile", index_controller.profile_get);
 
+// POST profile page
+router.post("/profile", index_controller.profile_post);
+
 // GET message page
 router.get("/send-message", index_controller.send_message_get);
 
