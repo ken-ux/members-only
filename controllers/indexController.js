@@ -251,3 +251,25 @@ exports.send_message_post = [
     res.redirect("/");
   }),
 ];
+
+exports.delete_message_get = asyncHandler(async (req, res, next) => {
+  // Redirect user to home page if they're not signed in
+  if (!req.user || !req.user.admin) {
+    return res.redirect("/");
+  }
+
+  // Get message details and render form
+  const message = await Message.findById(req.params.id).exec();
+
+  if (message === null) {
+    // No results.
+    res.redirect("/");
+  }
+
+  res.render("delete_message", { title: "Delete Message", message: message });
+});
+
+exports.delete_message_post = asyncHandler(async (req, res, next) => {
+  await Message.findByIdAndDelete(req.body.messageid);
+  res.redirect("/");
+});

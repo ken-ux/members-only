@@ -33,4 +33,10 @@ router.get("/send-message", index_controller.send_message_get);
 // POST message page
 router.post("/send-message", index_controller.send_message_post);
 
+// GET delete message page
+router.get("/delete/:id", index_controller.delete_message_get);
+
+// POST delete message page
+router.post("/delete/:id", index_controller.delete_message_post);
+
 module.exports = router;

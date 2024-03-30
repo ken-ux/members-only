@@ -15,5 +15,7 @@ block content
         else
           p Hidden Author
         p Date: #{ message.timestamp_formatted }
+        if currentUser && currentUser.admin
+          a(href=`/delete/${message.id}`) Delete
     else
       p There are no messages for you to read.

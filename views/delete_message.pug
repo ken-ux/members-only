@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+
+  h2 Message Details:
+  p Title: #{ message.title }
+  p Text: #{ message.text }
+
+  p Do you really want to delete this message?
+  form(method="POST")
+    .form-group
+      input#messageid.form-control(
+        type="hidden",
+        name="messageid",
+        value=message._id
+      )
+    button(type="submit") Delete
