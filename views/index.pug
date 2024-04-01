@@ -12,9 +12,9 @@ block content
         p Message: #{ message.text }
         if currentUser
           p Author: #{ message.author.full_name }
+          p Date: #{ message.timestamp_formatted }
         else
           p Hidden Author
-        p Date: #{ message.timestamp_formatted }
         if currentUser && currentUser.admin
           a(href=`/delete/${message.id}`) Delete
     else
