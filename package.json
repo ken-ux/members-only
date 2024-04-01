@@ -5,7 +5,7 @@
   "scripts": {
     "format": "npx prettier --write '**/*.pug' --plugin='@prettier/plugin-pug'",
     "start": "node ./bin/www",
-    "devstart": "nodemon --env-file=.env ./bin/www",
+    "devstart": "nodemon --env-file=.env ./bin/www & npx tailwindcss -i ./public/stylesheets/style.css -o ./public/stylesheets/style_output.css --watch",
     "serverstart": "DEBUG=inventory-application:* npm run devstart"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
   "devDependencies": {
     "@prettier/plugin-pug": "^3.0.0",
     "nodemon": "^3.1.0",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "tailwindcss": "^3.4.3"
   }
 }
