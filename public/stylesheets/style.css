@@ -4,14 +4,18 @@
 
 @layer base {
   body {
-    @apply p-12;
+    @apply px-24;
+    @apply py-12;
   }
 
   a {
     @apply text-emerald-500;
+    @apply hover:opacity-50;
   }
-}
 
-nav {
-  border: 1px solid red;
+  h1 {
+    @apply text-2xl;
+    @apply my-6;
+    @apply font-bold;
+  }
 }

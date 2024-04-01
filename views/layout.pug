@@ -5,17 +5,17 @@ html
     link(rel="stylesheet", href="/stylesheets/style_output.css")
   body
     nav
-      ul(class="flex gap-8 my-4 *:text-lg")
-        li(class="transition linear delay-50 hover:opacity-50")
+      ul(class="flex justify-end gap-12 my-4 *:text-xl")
+        li(class="transition linear delay-50")
           a(href="/") Home
         if currentUser
-          li(class="transition linear delay-50 hover:opacity-50")
+          li(class="transition linear delay-50")
             a(href="/profile") Profile
-          li(class="transition linear delay-50 hover:opacity-50")
+          li(class="transition linear delay-50")
             a(href="/logout") Logout
         else
-          li(class="transition linear delay-50 hover:opacity-50")
+          li(class="transition linear delay-50")
             a(href="/login") Login
-          li(class="transition linear delay-50 hover:opacity-50")
+          li(class="transition linear delay-50")
             a(href="/sign-up") Sign-Up
     block content

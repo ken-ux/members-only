@@ -2,20 +2,26 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{ title }
+  p(class="my-2") Welcome to #{ title }! Check out the feed below for members' messages.
   if currentUser
-    a(href="/send-message") Send a Message
-  ul
+    a(href="/send-message" class="transition linear delay-50 text-lg") + Send a Message
+  if !currentUser
+    p(class="mt-2 mb-6") #[em You're not logged in and will not be able to view authors or post dates.]
+  
+  ul(class="mt-6 flex flex-col gap-4")
     each message in messages
-      li
-        p Title: #{ message.title }
-        p Message: #{ message.text }
-        if currentUser
-          p Author: #{ message.author.full_name }
-          p Date: #{ message.timestamp_formatted }
-        else
-          p Hidden Author
-        if currentUser && currentUser.admin
-          a(href=`/delete/${message.id}`) Delete
+      li(class="outline outline-1 outline-emerald-500 rounded-lg")
+        div(class="bg-emerald-500 p-4 rounded-t-lg text-emerald-50")
+          p Title: #{ message.title }
+        div(class="p-4")
+          p Message: #{ message.text }
+          div(class="mt-4 text-sm")
+            if currentUser
+              p Posted By: #{ message.author.full_name }
+              p Date: #{ message.timestamp_formatted }
+            else
+              p Hidden Author
+            if currentUser && currentUser.admin
+              a(href=`/delete/${message.id}` class="text-blue-500 transition linear delay-50") Delete
     else
       p There are no messages for you to read.
