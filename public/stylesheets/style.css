@@ -2,15 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  padding: 50px;
-  font:
-    14px "Lucida Grande",
-    Helvetica,
-    Arial,
-    sans-serif;
+@layer base {
+  body {
+    @apply p-12;
+  }
+
+  a {
+    @apply text-emerald-500;
+  }
 }
 
-a {
-  color: #00b7ff;
+nav {
+  border: 1px solid red;
 }
