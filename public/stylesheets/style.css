@@ -9,7 +9,7 @@
   }
 
   a {
-    @apply text-emerald-500;
+    @apply text-emerald-600;
     @apply hover:opacity-50;
   }
 
