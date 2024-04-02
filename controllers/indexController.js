@@ -11,6 +11,10 @@ exports.index = asyncHandler(async (req, res, next) => {
 });
 
 exports.sign_up_get = (req, res, next) => {
+  // Redirect user to home page if they're signed in.
+  if (req.user) {
+    return res.redirect("/");
+  }
   res.render("sign_up", { title: "Sign-Up" });
 };
 
@@ -86,14 +90,24 @@ exports.sign_up_post = [
         user.password = hashedPassword;
         await user.save();
 
-        // New user saved. Redirect to home page.
-        res.redirect("/");
+        // Login user after signing up.
+        req.login(user, function (err) {
+          if (err) {
+            return next(err);
+          }
+          // New user saved and logged in. Redirect to home page.
+          return res.redirect("/");
+        });
       });
     }
   }),
 ];
 
 exports.login_get = (req, res, next) => {
+  // Redirect user to home page if they're signed in.
+  if (req.user) {
+    return res.redirect("/");
+  }
   res.render("login", { title: "Login" });
 };
 
@@ -259,7 +273,9 @@ exports.delete_message_get = asyncHandler(async (req, res, next) => {
   }
 
   // Get message details and render form
-  const message = await Message.findById(req.params.id).populate("author").exec();
+  const message = await Message.findById(req.params.id)
+    .populate("author")
+    .exec();
 
   if (message === null) {
     // No results.
