@@ -259,7 +259,7 @@ exports.delete_message_get = asyncHandler(async (req, res, next) => {
   }
 
   // Get message details and render form
-  const message = await Message.findById(req.params.id).exec();
+  const message = await Message.findById(req.params.id).populate("author").exec();
 
   if (message === null) {
     // No results.

@@ -3,11 +3,13 @@ extends layout
 block content
   h1= title
 
-  h2 Message Details:
-  p Title: #{ message.title }
-  p Text: #{ message.text }
+  h2.text-lg.my-4 Message Details
+  p #[strong Title]: #{ message.title }
+  p #[strong Message]: #{ message.text }
+  p #[strong Posted By]: #{ message.author.full_name }
+  p #[strong Date]: #{ message.timestamp_formatted }
 
-  p Do you really want to delete this message?
+  p.mt-12 Do you really want to delete this message?
   form(method="POST")
     .form-group
       input#messageid.form-control(
