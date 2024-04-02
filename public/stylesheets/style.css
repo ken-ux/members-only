@@ -27,6 +27,21 @@
     @apply px-2;
     @apply py-1;
   }
+
+  form {
+    @apply flex;
+    @apply flex-col;
+    @apply gap-4;
+  }
+
+  button {
+    @apply self-start;
+    @apply bg-emerald-500;
+    @apply text-slate-100;
+    @apply rounded-full;
+    @apply py-2;
+    @apply px-4;
+  }
 }
 
 @layer components {

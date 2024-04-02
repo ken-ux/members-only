@@ -3,7 +3,7 @@ extends layout
 block content
   h1= title
   p.text-xl.my-4 Hi, #[strong #{ currentUser.first_name }]! Change your profile settings below.
-  p #[strong Membership Status]:&nbsp;
+  p.my-2 #[strong Membership Status]:&nbsp;
     if currentUser.membership
       span.text-slate-50.bg-emerald-500.px-2 You're an official member.
     else
@@ -15,7 +15,7 @@ block content
       span.text-slate-50.bg-red-500.px-2 You're not an admin.
 
   if !currentUser.membership && !currentUser.admin
-    form.mt-12.flex.flex-col.gap-4(method="POST")
+    form.mt-12(method="POST")
       if !currentUser.membership
         .form-group
           label(for="membershipPassword") If you know the #[strong membership] password, enter it here:
@@ -24,9 +24,7 @@ block content
         .form-group
           label(for="adminPassword") For those with the #[strong admin] password, enter it here:
           input#adminPassword(type="password", name="adminPassword")
-      button.self-start.bg-emerald-500.text-slate-100.rounded-full.py-2.px-4(
-        type="submit"
-      ) Submit
+      button(type="submit") Submit
 
   if errors
     ul
