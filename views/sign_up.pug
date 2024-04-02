@@ -4,7 +4,7 @@ block content
   h1= title
   form(method="POST")
     .form-group
-      label(for="first_name") First Name:
+      label(for="first_name") First Name
       input#first_name(
         type="text",
         placeholder="John",
@@ -13,7 +13,7 @@ block content
         value=user === undefined ? "" : user.first_name
       )
     .form-group
-      label(for="last_name") Last Name:
+      label(for="last_name") Last Name
       input#last_name(
         type="text",
         placeholder="Doe",
@@ -22,7 +22,7 @@ block content
         value=user === undefined ? "" : user.last_name
       )
     .form-group
-      label(for="username") Username:
+      label(for="username") Username
       input#username(
         type="text",
         placeholder="JohnDoe123",
@@ -31,7 +31,7 @@ block content
         value=user === undefined ? "" : user.username
       )
     .form-group
-      label(for="password") Password:
+      label(for="password") Password
       input#password(type="password", name="password", required)
     .form-group
       label(for="membership") If you know the secret membership password, enter it here:
