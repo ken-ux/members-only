@@ -4,7 +4,7 @@ block content
   h1= title
   form(method="POST")
     .form-group
-      label(for="title") Title:
+      label(for="title") Title
       input#title(
         type="text",
         name="title",
@@ -12,8 +12,11 @@ block content
         value=message === undefined ? "" : message.title
       )
     .form-group
-      label(for="text") Message:
-      textarea#text(name="text", required)= message === undefined ? "" : message.text
+      label(for="text") Message
+      textarea#text.rounded-md.border-2.border-slate-300.px-2.py-1.max-w-md(
+        name="text",
+        required
+      )= message === undefined ? "" : message.text
     button(type="submit") Submit
 
   if errors
