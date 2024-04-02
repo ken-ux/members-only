@@ -3,11 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply px-24;
-    @apply py-12;
-  }
-
   a {
     @apply text-emerald-500;
     @apply hover:opacity-50;

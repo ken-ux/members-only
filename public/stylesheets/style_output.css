@@ -446,13 +446,6 @@ video {
   display: none;
 }
 
-body {
-  padding-left: 6rem;
-  padding-right: 6rem;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
 a {
   --tw-text-opacity: 1;
   color: rgb(16 185 129 / var(--tw-text-opacity));
@@ -731,6 +724,16 @@ button {
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
+}
+
+.px-24 {
+  padding-left: 6rem;
+  padding-right: 6rem;
+}
+
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .text-lg {
