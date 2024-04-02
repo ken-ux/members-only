@@ -28,7 +28,7 @@ Live version of the app can be found here: [https://members-only-production-4f8b
 - One issue I ran into early on was an indefinite loading state after trying to log a user in.
   - After testing and researching, I realized that I never called `next()` in the middleware for validating the login form fields.
   - This meant my app never moved on to the authentication middleware that followed field validation.
-  - After this, I was extra mindful of how data is transformed, passed on, and returned between middleware.
+  - After this, I was extra mindful of where data is passed on and returned in a middleware chain.
 - Overriding the default behavior of the `Passport.js` `authenticate()` method so I can render the login page again with an error message if user details are incorrect.
 - Conditionally rendering content based on if the user is signed in, as well as whether the user has membership or admin status.
 - Writing a shorthand npm script for formatting Pug files with prettier.
