@@ -18,4 +18,21 @@
     @apply my-6;
     @apply font-bold;
   }
+
+  input {
+    @apply max-w-64;
+    @apply border-2;
+    @apply rounded-md;
+    @apply border-slate-300;
+    @apply px-2;
+    @apply py-1;
+  }
+}
+
+@layer components {
+  .form-group {
+    @apply flex;
+    @apply flex-col;
+    @apply gap-1;
+  }
 }

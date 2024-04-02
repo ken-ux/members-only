@@ -2,29 +2,31 @@ extends layout
 
 block content
   h1= title
-  h2 Hi #{ currentUser.first_name }! Change your profile settings below.
-  p Membership Status:&nbsp;
+  p.text-xl.my-4 Hi, #[strong #{ currentUser.first_name }]! Change your profile settings below.
+  p #[strong Membership Status]:&nbsp;
     if currentUser.membership
-      span.success You're an official member.
+      span.text-slate-50.bg-emerald-500.px-2 You're an official member.
     else
-      span.danger You're not an official member.
-  p Admin Status:&nbsp;
+      span.text-slate-50.bg-red-500.px-2 You're not an official member.
+  p #[strong Admin Status]:&nbsp;
     if currentUser.admin
-      span.success You're an admin.
+      span.text-slate-50.bg-emerald-500.px-2 You're an admin.
     else
-      span.danger You're not an admin.
+      span.text-slate-50.bg-red-500.px-2 You're not an admin.
 
   if !currentUser.membership && !currentUser.admin
-    form(method="POST")
+    form.mt-12.flex.flex-col.gap-4(method="POST")
       if !currentUser.membership
         .form-group
-          label(for="membershipPassword") Membership Password:
+          label(for="membershipPassword") If you know the #[strong membership] password, enter it here:
           input#membershipPassword(type="password", name="membershipPassword")
       if !currentUser.admin
         .form-group
-          label(for="adminPassword") Admin Password:
+          label(for="adminPassword") For those with the #[strong admin] password, enter it here:
           input#adminPassword(type="password", name="adminPassword")
-      button(type="submit") Submit
+      button.self-start.bg-emerald-500.text-slate-100.rounded-full.py-2.px-4(
+        type="submit"
+      ) Submit
 
   if errors
     ul
