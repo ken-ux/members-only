@@ -24,12 +24,12 @@ block content
 
   ul.mt-12.flex.flex-col.gap-4
     each message in messages
-      li.outline.outline-1.outline-emerald-600.rounded-lg
+      li.rounded-lg.shadow
         .bg-emerald-600.p-4.rounded-t-lg.text-emerald-50
-          p Title: #{ message.title }
-        .p-4.bg-slate-50
-          p Message: #{ message.text }
-          .mt-4.text-sm
+          h2.text-lg #{ message.title }
+        .p-4.bg-slate-50.rounded-lg.shadow-lg
+          p #{ message.text }
+          .mt-4.text-sm.text-slate-500.flex.flex-col.gap-1
             if currentUser
               p Posted By: #{ message.author.full_name }
               p Date: #{ message.timestamp_formatted }
