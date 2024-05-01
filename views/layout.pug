@@ -5,11 +5,13 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet", href="/stylesheets/style_output.css")
-  body.px-24.py-12
-    nav
-      ul.flex.justify-end.items-center.gap-12.my-4(class="*:text-xl")
+  body.min-h-screen.relative
+    nav.py-4.px-8.mb-12.backdrop-blur-sm.border-b.sticky.top-0(
+      class="bg-white/20 md:px-24"
+    )
+      ul.flex.justify-end.items-center.gap-8(class="*:text-lg md:gap-12")
         li
-          a.transition.linear.delay-50(href="/")
+          a.transition.linear.delay-50(href="/", aria-label="Home")
             svg.w-8.h-8(
               http://www.w3.org/2000/svg,
               viewBox="0 0 24 24",
@@ -31,4 +33,7 @@ html(lang="en")
             a.transition.linear.delay-50(href="/login") Login
           li
             a.transition.linear.delay-50(href="/sign-up") Sign-Up
-    block content
+    .px-8(class="md:px-24")
+      block content
+    footer.px-8.py-4.bg-emerald-50.w-full.text-right.absolute.bottom-0.shadow-inner(class="md:px-24")
+      a.text-slate-500(href="https://github.com/ken-ux/inventory-application") GitHub Repo
